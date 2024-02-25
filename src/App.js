@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home, Login } from "./pages";
+import { Following, Home, Login, Playlist, Trending } from "./pages";
 import { Navbar, Sidebar } from "./components";
 import Demo from "./components/Demo";
+import YourVideos from "./pages/YourVideos";
 
 const App = () => {
   return (
@@ -15,7 +16,11 @@ const App = () => {
         </div>
         <div className="w-full md:w-auto">
           <Routes>
-            <Route path="/" element={<Demo />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/trending" element={<Trending />} />
+            <Route path="/:user/following" element={<Following />} />
+            <Route path="/playlist" element={<Playlist />} />
+            <Route path="/your-videos" element={<YourVideos />} />
           </Routes>
         </div>
       </div>
