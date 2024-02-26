@@ -9,7 +9,8 @@ import {
   YourVideos,
 } from "./pages";
 import { Navbar, Sidebar } from "./components";
-import Demo from "./components/Demo";
+import WatchVideo from "./components/WatchVideo";
+import StreamVideo from "./components/StreamVideo";
 
 const App = () => {
   return (
@@ -27,7 +28,8 @@ const App = () => {
             <Route path="/:user/following" element={<Following />} />
             <Route path="/playlist" element={<Playlist />} />
             <Route path="/your-videos" element={<YourVideos />} />
-            <Route path="/demo/*" element={<Demo />} />
+            <Route path="/watch-video" element={<WatchVideo />} />
+            <Route path="/stream-video" element={<StreamVideo />} />
           </Routes>
         </div>
       </div>
