@@ -58,7 +58,7 @@ function Demo() {
       ws.onopen = () => {
         console.log("WebSocket connected");
       };
-      
+
     }); // Replace with your backend WebSocket URI
 
     ws.onmessage = (event) => {
@@ -86,3 +86,4 @@ function Demo() {
 }
 
 export default Demo;
+
