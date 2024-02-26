@@ -53,22 +53,22 @@ function Demo() {
   // };
 
   useEffect(() => {
-    new WebSocket("ws://localhost:8000", (ws, err) => {
+    new WebSocket("ws://localhost:9000/", (ws, err) => {
       console.log(ws);
-      // ws.onopen = () => {
-      //   console.log("WebSocket connected");
-      // };
+      ws.onopen = () => {
+        console.log("WebSocket connected");
+      };
       
     }); // Replace with your backend WebSocket URI
 
-    // ws.onmessage = (event) => {
-    //   // Handle messages received from the backend
-    //   console.log('Message received from server:', event.data);
-    // };
+    ws.onmessage = (event) => {
+      // Handle messages received from the backend
+      console.log('Message received from server:', event.data);
+    };
 
-    // ws.onclose = () => {
-    //   console.log('WebSocket disconnected');
-    // };
+    ws.onclose = () => {
+      console.log('WebSocket disconnected');
+    };
 
     // Clean up WebSocket connection when the component unmounts
     return () => {
