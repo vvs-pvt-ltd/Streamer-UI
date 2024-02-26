@@ -1,18 +1,51 @@
+import axios from "axios";
 import React, { useRef, useEffect, useState } from "react";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 
 const StreamVideo = () => {
   const videoRef = useRef();
   const [isStreaming, setIsStreaming] = useState(false);
   const socketRef = useRef();
+  const [setsome, setSetsome] = useState();
+  const [socket, setSocket] = useState();
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await axios.get(
+  //       `${process.env.REACT_APP_SOCKET_URL}/api/v1/user`
+  //     );
+  //     console.log(response.data);
+  //   };
+
+  //   fetchData();
+  // }, []);
   useEffect(() => {
-    socketRef.current = io(process.env.REACT_APP_SOCKET_URL);
+    const socketInstance = io("http://localhost:9000");
+    setSocket(socketInstance);
+
+    // listen for events emitted by the server
+
+    socketInstance.on("connect", () => {
+      console.log("Connected to server");
+    });
+
+    socketInstance.on("message", (data) => {
+      console.log(`Received message: ${data}`);
+    });
 
     return () => {
-      socketRef.current.disconnect();
+      if (socketInstance) {
+        socketInstance.disconnect();
+      }
     };
   }, []);
+  // useEffect(() => {
+  //   socketRef.current = io(process.env.REACT_APP_SOCKET_URL);
+
+  //   return () => {
+  //     socketRef.current.disconnect();
+  //   };
+  // }, []);
 
   const startStream = () => {
     navigator.mediaDevices
