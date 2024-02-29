@@ -1,16 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import {
-  Following,
-  Home,
-  Login,
-  Playlist,
-  Trending,
-  YourVideos,
-} from "./pages";
-import { Navbar, Sidebar } from "./components";
-import WatchVideo from "./components/WatchVideo";
-import StreamVideo from "./components/StreamVideo";
+import { Following, Home, Playlist, Trending, YourVideos } from "./pages";
+import { Navbar, Sidebar, StreamVideo, WatchVideo } from "./components";
 
 const App = () => {
   return (
