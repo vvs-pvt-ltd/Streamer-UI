@@ -1,24 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import io from "socket.io-client";
 
+
+const socket = io.connect('http://localhost:9000/');
 const WatchVideo = () => {
   const videoRef = useRef();
 
-  useEffect(() => {
-    const socket = io(process.env.REACT_APP_SOCKET_URL);
+  socket.on("View", (view) => {
+    console.log("Connected to server", view);
+    videoRef.current.src = view;
+  });
 
-    socket.on("connect", () => {
-      console.log("Connected to server");
-    });
-
-    socket.on("videoStream", (stream) => {
-      videoRef.current.src = stream;
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+ 
 
   return (
     <div>
