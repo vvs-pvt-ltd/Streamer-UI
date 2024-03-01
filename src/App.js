@@ -1,16 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import {
-  Following,
-  Home,
-  Login,
-  Playlist,
-  Trending,
-  YourVideos,
-} from "./pages";
-import { Navbar, Sidebar } from "./components";
-import WatchVideo from "./components/WatchVideo";
-import StreamVideo from "./components/StreamVideo";
+import { Following, Home, Playlist, Trending, YourVideos } from "./pages";
+import { Navbar, Sidebar, StreamVideo, WatchVideo } from "./components";
+import Demo from "./components/Demo";
 
 const App = () => {
   return (
@@ -30,6 +22,9 @@ const App = () => {
             <Route path="/your-videos" element={<YourVideos />} />
             <Route path="/watch-video" element={<WatchVideo />} />
             <Route path="/stream-video" element={<StreamVideo />} />
+            <Route path="/demo" element={<Demo />} />
+            {/* <Route path="/app" ></Route> */}
+
           </Routes>
         </div>
       </div>
