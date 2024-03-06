@@ -1,43 +1,38 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 const socket = io.connect('http://localhost:9000/');
-
 const Demo = () => {
   const videoRef = useRef();
-  let mediaRecorder; 
-
-  const startStream = () => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then((stream) => {
-        videoRef.current.srcObject = stream;
-
-        
-        mediaRecorder = new MediaRecorder(stream);
-        mediaRecorder.ondataavailable = event => {
-          if (event.data && event.data.size > 0) {
-            socket.emit('Stream', event.data);
-          }
-        };
-        mediaRecorder.start(1000); 
-      })
-      .catch((error) => console.error("Error accessing webcam:", error));
-  };
-
+  const canvasRef = useRef();
   useEffect(() => {
-    return () => {
-      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
-      }
-    };
-  }, []);
+    const canvas = canvasRef.current
+    var context = canvas.getContext('2d');
 
+
+
+    const draw = () => {
+      context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+      console.log(canvas.toDataURL('image/webp'));
+      socket.emit('Stream', canvas.toDataURL('image/webp'));
+    }
+
+    const loadCamera = (stream) => {
+      videoRef.current.srcObject = stream;
+    }
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(loadCamera)
+
+    setInterval(() => {
+      draw();
+    }, 0.00001);
+  }, []);
   return (
     <div>
-      <video ref={videoRef} autoPlay></video>
-      <br />
-      <button onClick={startStream}>Start Stream</button>
+      <video ref={videoRef} className='w-[100vw] h-[100vh]' autoPlay></video>
+      
+      <canvas ref={canvasRef} className='hidden' width={900} height={700}></canvas>
     </div>
   );
 };
