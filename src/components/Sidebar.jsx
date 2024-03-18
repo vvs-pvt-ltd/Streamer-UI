@@ -1,74 +1,102 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import trendingIcon from "../assets/icons/trending.svg";
+import trendingIconSelected from "../assets/icons/trendingSelected.svg";
+import followingIcon from "../assets/icons/following.svg";
+import followingIconSelected from "../assets/icons/followingSelected.svg";
+import playlistIcon from "../assets/icons/playlist.svg";
+import playlistIconSelected from "../assets/icons/playlistSelected.svg";
+import yourVideoIcon from "../assets/icons/your-video.svg";
+import yourVideoIconSelected from "../assets/icons/your-videoSelected.svg";
 
 const Sidebar = () => {
-  const [activeButton, setActiveButton] = useState("");
-
+  const [activeButton, setActiveButton] = useState();
   const handleButtonClick = (buttonName) => {
-    setActiveButton(buttonName); 
+    setActiveButton(buttonName);
   };
+  let location = useLocation();
+  // console.log(location);
+  useEffect(() => {
+    handleButtonClick(location.pathname);
+  }, [location.pathname]);
 
   return (
     <div className="flex flex-col gap-2 w-full px-8">
       <Link to="/">
-        <button
-          className={`w-full py-2 rounded-xl ${
-            activeButton === "home"
+        <div
+          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+            activeButton === "/"
               ? "bg-primaryColor text-white"
               : "text-textColor"
           }`}
-          onClick={() => handleButtonClick("home")}
         >
-          Home
-        </button>
+          {/* <img src={TrendingIcon} /> */}
+          <button>Home</button>
+        </div>
       </Link>
       <Link to="/trending">
-        <button
-          className={`w-full py-2 rounded-xl ${
-            activeButton === "trending"
+        <div
+          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+            activeButton === "/trending"
               ? "bg-primaryColor text-white"
               : "text-textColor"
           }`}
-          onClick={() => handleButtonClick("trending")}
         >
-          Trending
-        </button>
+          {activeButton === "/trending" ? (
+            <img src={trendingIconSelected} />
+          ) : (
+            <img src={trendingIcon} />
+          )}
+          <button>Trending</button>
+        </div>
       </Link>
-      <Link to="/demo/following">
-        <button
-          className={`w-full py-2 rounded-xl ${
-            activeButton === "following"
+      <Link to="/following">
+        <div
+          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+            activeButton === "/following"
               ? "bg-primaryColor text-white"
               : "text-textColor"
           }`}
-          onClick={() => handleButtonClick("following")}
         >
-          Following
-        </button>
+          {activeButton === "/following" ? (
+            <img src={followingIconSelected} />
+          ) : (
+            <img src={followingIcon} />
+          )}
+          <button>Following</button>
+        </div>
       </Link>
       <Link to="/playlist">
-        <button
-          className={`w-full py-2 rounded-xl ${
-            activeButton === "playlist"
+        <div
+          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+            activeButton === "/playlist"
               ? "bg-primaryColor text-white"
               : "text-textColor"
           }`}
-          onClick={() => handleButtonClick("playlist")}
         >
-          Playlist
-        </button>
+          {activeButton === "/playlist" ? (
+            <img src={playlistIconSelected} />
+          ) : (
+            <img src={playlistIcon} />
+          )}
+          <button>Playlist</button>
+        </div>
       </Link>
       <Link to="/your-videos">
-        <button
-          className={`w-full py-2 rounded-xl ${
-            activeButton === "your-videos"
+        <div
+          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+            activeButton === "/your-videos"
               ? "bg-primaryColor text-white"
               : "text-textColor"
           }`}
-          onClick={() => handleButtonClick("your-videos")}
         >
-          Your Videos
-        </button>
+          {activeButton === "/your-videos" ? (
+            <img src={yourVideoIconSelected} />
+          ) : (
+            <img src={yourVideoIcon} />
+          )}
+          <button>Your Videos</button>
+        </div>
       </Link>
     </div>
   );

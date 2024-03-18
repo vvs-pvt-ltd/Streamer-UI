@@ -1,7 +1,22 @@
 import React from "react";
+import heroImg from "../assets/img/hero.png";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div className="w-full">
+      <div className="">
+        <p className="font-semibold text-2xl">Live Stream</p>
+      </div>
+
+      <div className="w-full h-auto aspect-w-16 aspect-h-9 mt-6">
+        <img
+          src={heroImg}
+          alt="heroImg"
+          className="object-cover w-full h-full  rounded-[50px]"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Home;
