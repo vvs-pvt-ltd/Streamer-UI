@@ -1,48 +1,29 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
-import axios from "axios";
-const socket = io.connect(process.env.REACT_APP_SERVER_URI);
+import ReactPlayer from "react-player";
+
+const socket = io.connect('http://localhost:9000/');
 
 const WatchVideo = () => {
-  const videoRef = useRef();
 
-  const createPeer = () => {
-    const peer = new RTCPeerConnection({
-      iceServers: [
-        { 'urls': 'stun:stun.l.google.com:19302' }
-      ]
-    });
-    peer.ontrack = handleTrackEvent;
-    peer.onnegotiationneeded = () => handleNegotiationNeededEvent(peer);
-    return peer;
-  }
+  // const [imageSrc, setImageSrc] = useState("");
 
-  const handleNegotiationNeededEvent = async (peer) => {
-    const offer = await peer.createOffer();
-    await peer.setLocalDescription(offer);
-    const payload = {
-      sdp: peer.localDescription
-    }
-    const disc = axios.post(`${process.env.REACT_APP_SERVER_URI}\api\server`,
-      payload
-    );
-    const desc = new RTCSessionDescription(disc);
-    peer.setRemoteDescription(desc).catch(e => console.log(e));
-  };
-  const handleTrackEvent = (e) => {
-    videoRef.current.srcObject = e.streams[0];
-  }
+  let index = 0;
+  // const videoRef = useRef();
+  // useEffect(() => {
+  //   socket.on("view", (stream) => {
+  //     console.log("get view");
+  //     videoRef.current.srcObject = stream;
+  //   });
+  // }, []);
 
-  const watch = () => {
-    const peer = createPeer();
-    peer.addTransceiver("video", { direction: "recvonly" })
-  }
+
 
   return (
-    <div>
-      <p>Video will appear below when it's available</p>
-      <video ref={videoRef} autoPlay></video>
-      <button onClick={watch}>view</button>
+    <div className="">
+      <video id="videoplayer" width="650" controls muted="muted" autoplay>
+        <source src="http://localhost:9000/video" type="video/mp4" />
+      </video>
     </div>
   );
 };

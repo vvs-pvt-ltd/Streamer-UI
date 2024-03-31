@@ -1,89 +1,49 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
-function Demo() {
-  const localVideoRef = useRef();
-  const remoteVideoRef = useRef();
-  let localStream;
-  let remoteStream;
-  let ws;
+const socket = io.connect('http://localhost:9000/');
+const Demo = () => {
+  const videoRef = useRef();
+  const canvasRef = useRef();
+  let frame = [];
+  const startstream = () => {
+    const canvas = canvasRef.current
+    var context = canvas.getContext('2d');
 
-  useEffect(() => {
-    const start = async () => {
-      try {
-        localStream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: true,
-        });
-        localVideoRef.current.srcObject = localStream;
-      } catch (error) {
-        console.error("Error accessing media devices:", error);
+
+
+    const draw =async () => {
+      context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+      // console.log(canvas.toDataURL('image/webp'));
+      frame.push(canvas.toDataURL('image/webp'));
+      console.log(frame.length);
+      if (frame.length === 10) {
+        // console.log(frame.length);
+        await socket.emit('Stream', frame);
+        frame = [];
       }
-    };
+    }
 
-    start();
+    const loadCamera = (stream) => {
+      videoRef.current.srcObject = stream;
+    }
 
-    return () => {
-      if (localStream) {
-        localStream.getTracks().forEach((track) => track.stop());
-      }
-    };
-  }, []);
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(loadCamera)
 
-  // const startCall = async () => {
-  //   if (!localStream) {
-  //     console.error('Local stream not initialized yet.');
-  //     return;
-  //   }
-
-  //   const peerConnection = new RTCPeerConnection();
-
-  //   localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
-
-  //   peerConnection.ontrack = (event) => {
-  //     remoteStream = event.streams[0];
-  //     remoteVideoRef.current.srcObject = remoteStream;
-  //   };
-
-  //   const offer = await peerConnection.createOffer();
-  //   await peerConnection.setLocalDescription(offer);
-
-  //   // Send the offer to the backend server via WebSocket
-  //   const offerData = JSON.stringify(offer);
-  //   ws.send(offerData);
-  // };
-
-  useEffect(() => {
-    new WebSocket("ws://localhost:9000/", (ws, err) => {
-      console.log(ws);
-      ws.onopen = () => {
-        console.log("WebSocket connected");
-      };
-
-    }); // Replace with your backend WebSocket URI
-
-    ws.onmessage = (event) => {
-      // Handle messages received from the backend
-      console.log('Message received from server:', event.data);
-    };
-
-    ws.onclose = () => {
-      console.log('WebSocket disconnected');
-    };
-
-    // Clean up WebSocket connection when the component unmounts
-    return () => {
-      ws.close();
-    };
-  }, []);
-
+    setInterval(() => {
+      draw();
+    }, 10);
+  };
   return (
     <div>
-      <video ref={localVideoRef} autoPlay muted></video>
-      <video ref={remoteVideoRef} autoPlay></video>
-      <button>Start Call</button>
+      <button onClick={startstream}>start stream</button>
+      <br />
+      <video ref={videoRef} className='w-[100vw] h-[100vh]' autoPlay></video>
+      <br />
+      <canvas ref={canvasRef} className='hidden' width={1920} height={1080}></canvas>
     </div>
   );
-}
+};
 
 export default Demo;
-
