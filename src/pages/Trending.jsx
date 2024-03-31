@@ -1,12 +1,13 @@
-import React from 'react'
+import React from "react";
+import TrendingIcon from "../assets/icons/trending.svg";
 
 const Trending = () => {
   return (
-    <div>
-      <p className='w-full flex justify-center items-center'></p>
-      <p className='justify-center items-center flex w-full '></p>
+    <div className="flex">
+      <p>Trending</p>
+     
     </div>
-  )
-}  
+  );
+};
 
-export default Trending
+export default Trending;

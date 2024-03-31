@@ -7,18 +7,19 @@ import VideoDemo from "./components/audiodemo";
 
 const App = () => {
   return (
-    <div>
+    <div className="text-textColor">
       <Navbar />
 
-      <div className="flex flex-wrap">
-        <div className="w-full md:w-[250px]">
+      <div className="md:flex">
+        <div className="w-full md:w-[400px]">
           <Sidebar />
         </div>
-        <div className="w-full md:w-auto">
+        <div className="w-full px-6 pr-20">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/trending" element={<Trending />} />
-            <Route path="/:user/following" element={<Following />} />
+            <Route path="/following" element={<Following />} />
+            {/* <Route path="/:user/following" element={<Following />} /> */}
             <Route path="/playlist" element={<Playlist />} />
             <Route path="/your-videos" element={<YourVideos />} />
             <Route path="/watch-video" element={<WatchVideo />} />
@@ -26,7 +27,6 @@ const App = () => {
             <Route path="/demo" element={<Demo />} />
             <Route path="/videodemo" element={<VideoDemo />} />
             {/* <Route path="/app" ></Route> */}
-
           </Routes>
         </div>
       </div>

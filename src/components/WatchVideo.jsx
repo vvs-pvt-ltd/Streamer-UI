@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import ReactPlayer from "react-player";
 
-const socket = io.connect('http://localhost:9000/');
 
+const socket = io.connect("http://localhost:9000/");  
 const WatchVideo = () => {
 
   // const [imageSrc, setImageSrc] = useState("");
