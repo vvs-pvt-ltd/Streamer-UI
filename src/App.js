@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import { Following, Home, Playlist, Trending, YourVideos } from "./pages";
 import { Navbar, Sidebar, StreamVideo, WatchVideo } from "./components";
 import Demo from "./components/Demo";
+import Dummy from "./components/dummy";
+import VideoUploader from "./components/VideoUpload";
 
 const App = () => {
   return (
@@ -15,6 +17,7 @@ const App = () => {
         </div>
         <div className="w-full px-6 pr-20">
           <Routes>
+            <Route path="/upload" element={<VideoUploader />} />
             <Route path="/" element={<Home />} />
             <Route path="/trending" element={<Trending />} />
             <Route path="/following" element={<Following />} />
@@ -24,6 +27,7 @@ const App = () => {
             <Route path="/watch-video" element={<WatchVideo />} />
             <Route path="/stream-video" element={<StreamVideo />} />
             <Route path="/demo" element={<Demo />} />
+            <Route path="/dummy" element={<Dummy />} />
             {/* <Route path="/app" ></Route> */}
           </Routes>
         </div>

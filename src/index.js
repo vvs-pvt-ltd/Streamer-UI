@@ -10,16 +10,21 @@ import {
   Routes,
 } from "react-router-dom";
 import { Login } from "./pages";
+import { StateProvider } from "./context/StateProvider";
+import { initialState } from "./context/intialState";
+import reducer from "./context/reducer";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/*" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </BrowserRouter>
+    </StateProvider>
   </React.StrictMode>
 );
 

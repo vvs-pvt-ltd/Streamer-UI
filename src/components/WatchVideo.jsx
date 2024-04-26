@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import React from "react";
 
-
-const socket = io.connect("http://localhost:9000/");  
 const WatchVideo = () => {
-  const [imageSrc, setImageSrc] = useState("");
-  
-
-  useEffect(() => {
-   
-
-    socket.on("View", (image) => {
-      setImageSrc(image);
-    });
-
-  }, []);
-
   return (
-    <div className="w-[100vw] h-[100vh] md:w-[50vw] md:h-[50vh]">
-      <img src={imageSrc}  />
-    </div>
+    <video
+      src="https://zk29l5cf-9000.inc1.devtunnels.ms/video"
+      autoPlay
+      controls
+    />
   );
 };
 
