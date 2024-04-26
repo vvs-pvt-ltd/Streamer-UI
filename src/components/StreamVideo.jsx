@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const StreamVideo = () => {
-  return (
-    <div>StreamVideo</div>
-  )
-}
+  return <div>StreamVideo</div>;
+};
 
-export default StreamVideo
+export default StreamVideo;
