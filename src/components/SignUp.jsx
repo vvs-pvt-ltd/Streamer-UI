@@ -48,7 +48,7 @@ export function SignupForm({ setIsSignupClicked }) {
       };
 
       try {
-        const response = await axios.post("/api/v1/user/register", payload);
+        const response = await axios.post("/user/register", payload);
         // console.log(response);
         if (response.data.status === 200) {
           toast("User Register Successfully!!");

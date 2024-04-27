@@ -32,7 +32,7 @@ export function LoginForm({ setIsSignupClicked }) {
       };
 
       try {
-        const response = await axios.post("/api/v1/user/login", payload);
+        const response = await axios.post("/user/login", payload);
         // console.log(response);
         if (response.data.status === 200) {
           toast("User Logged in Successfully!!");

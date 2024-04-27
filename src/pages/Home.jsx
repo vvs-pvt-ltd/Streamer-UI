@@ -1,5 +1,6 @@
 import React from "react";
 import heroImg from "../assets/img/hero.png";
+import HomeCards from "../components/HomeCards";
 
 const Home = () => {
   return (
@@ -15,6 +16,8 @@ const Home = () => {
           className="object-cover w-full h-full  rounded-[50px]"
         />
       </div>
+
+      <HomeCards />
     </div>
   );
 };
