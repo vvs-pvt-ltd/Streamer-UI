@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.authenticated) navigate("/");
+    if (user?.authenticated) navigate("/");
   }, [user]);
 
   return (
