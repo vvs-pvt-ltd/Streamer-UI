@@ -19,8 +19,8 @@ import { actionType } from "../context/reducer";
 export function LoginForm({ setIsSignupClicked }) {
   const [{ user }, dispatch] = useStateValue();
   // console.log(user)
-  const [email, setEmail] = useState("viveksahu1762@gmail.com");
-  const [password, setPassword] = useState("testpassword");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {

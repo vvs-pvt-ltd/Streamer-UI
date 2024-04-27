@@ -10,21 +10,17 @@ import {
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { useStateValue } from "../context/StateProvider";
-import GoogleIcon from "../assets/icons/google.png";
-import FaceBookIcon from "../assets/icons/facebook.png";
 import axios from "axios";
 import { actionType } from "../context/reducer";
-import loginThumb from "../assets/login/loginThumb.png";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
 export function SignupForm({ setIsSignupClicked }) {
-  const [firstName, setFirstName] = useState("Vivek");
-  const [lastName, setLastName] = useState("Sahu");
-  const [password, setPassword] = useState("testpassword");
-  // const [confirmPassword, setConfirmPassword] = useState("testpassword");
-  const [email, setEmail] = useState("viveksahu1762@gmail.com");
-  const [username, setUsername] = useState("vwakesahu");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [{ user }, dispatch] = useStateValue();
 
   const navigate = useNavigate();
