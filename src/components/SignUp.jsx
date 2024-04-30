@@ -60,30 +60,6 @@ export function SignupForm({ setIsSignupClicked }) {
           localStorage.setItem("user", JSON.stringify(reduxObj));
           navigate("/");
         }
-
-        // localStorage.setItem("user", JSON.stringify(providerData[0]));
-
-        //   {
-        //     "data": {
-        //         "status": 200,
-        //         "payload": {
-        //             "user": {
-        //                 "_id": "662c8d3fca43ea1ee01fd0dd",
-        //                 "username": "vwakesahu",
-        //                 "email": "viveksahu1762@gmail.com",
-        //                 "__v": 0
-        //             },
-        //             "token": {
-        //                 "RefreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjJjOGQzZmNhNDNlYTFlZTAxZmQwZGQiLCJpYXQiOjE3MTQxOTU3NzUsImV4cCI6MTcxNTA1OTc3NX0.uT-49pIg-eLW5fgjYOumVkag5Stv0JL4bzFgMJOcMdg",
-        //                 "AccessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjJjOGQzZmNhNDNlYTFlZTAxZmQwZGQiLCJlbWFpbCI6InZpdmVrc2FodTE3NjJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ2d2FrZXNhaHUiLCJpYXQiOjE3MTQxOTU3NzUsImV4cCI6MTcxNDI4MjE3NX0.3fsDiqu7enihbacZrzhjzUUt_p8f3e4M3EOl2iVc2vc"
-        //             }
-        //         },
-        //         "message": "user register successfully",
-        //         "issuccess": true
-        //     },
-        //     "status": 201,
-
-        // }
       } catch (error) {
         console.log(error.response);
         if (error?.response?.status) toast("User ALready Exist!!");

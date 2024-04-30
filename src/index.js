@@ -15,6 +15,7 @@ import axios from "axios";
 axios.defaults.baseURL = `${process.env.REACT_APP_BACKEND_URI}/api/v1`;
 axios.defaults.headers.common["Authorization"] = "Auth Token";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

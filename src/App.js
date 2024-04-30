@@ -5,6 +5,7 @@ import { Navbar, Sidebar, StreamVideo, WatchVideo } from "./components";
 import Demo from "./components/Demo";
 import Dummy from "./components/dummy";
 import VideoUploader from "./components/VideoUpload";
+import Video from "./components/Video";
 
 const App = () => {
   return (
@@ -20,8 +21,9 @@ const App = () => {
             <Route path="/upload" element={<VideoUploader />} />
             <Route path="/" element={<Home />} />
             <Route path="/trending" element={<Trending />} />
-            <Route path="/following" element={<Following />} />
-            {/* <Route path="/:user/following" element={<Following />} /> */}
+            {/* <Route path="/following" element={<Following />} /> */}
+            <Route path="/video/:video" element={<Video />} />
+            <Route path="/:user/following" element={<Following />} />
             <Route path="/playlist" element={<Playlist />} />
             <Route path="/your-videos" element={<YourVideos />} />
             <Route path="/watch-video" element={<WatchVideo />} />

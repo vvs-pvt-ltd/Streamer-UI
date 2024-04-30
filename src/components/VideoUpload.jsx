@@ -1,52 +1,48 @@
-import React, { useState } from "react";
+import { useStateValue } from "../context/StateProvider";
 import axios from "axios";
+import React, { useState } from "react";
 
-const VideoUploader = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [uploadedVideo, setUploadedVideo] = useState(null);
+const VideoUpload = () => {
+  const [thumbnailPhone, setThumbnailPhone] = useState();
+  const [videoPhone, setVideoPhone] = useState();
+  const [{ user }] = useStateValue();
+  console.log(user);
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
-
-  const handleUpload = async () => {
+  const handleVideoUpload = async () => {
     try {
       const formData = new FormData();
-      formData.append("video", selectedFile);
-      const response = await axios.post(
-        "http://localhost:3000/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(response.data); // log the response from the server
-      setUploadedVideo(response.data); // assuming the server returns some data about the uploaded video
-    } catch (error) {
-      console.error("Error uploading video:", error);
+      formData.append("title", "Video First");
+      // formData.append("description", "Video First Description");
+      formData.append("ispublic", true);
+      formData.append("thumbnail", thumbnailPhone);
+      formData.append("video", videoPhone);
+      formData.append("email", "viveksahu1762@gmail.com");
+
+      const res = await axios.post("/video/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
     }
   };
-
   return (
     <div>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload Video</button>
-      {uploadedVideo && (
-        <div>
-          <p>Video Uploaded Successfully!</p>
-          <video controls width="500">
-            <source
-              src={`http://localhost:3000/video/${uploadedVideo}`}
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      )}
+      <input
+        type="file"
+        onChange={(e) => setVideoPhone(e.target.files[0])}
+        placeholder="Video"
+      />
+
+      <input
+        type="file"
+        onChange={(e) => setThumbnailPhone(e.target.files[0])}
+        placeholder="Video"
+      />
+      <button onClick={handleVideoUpload}>Submit</button>
     </div>
   );
 };
 
-export default VideoUploader;
+export default VideoUpload;
