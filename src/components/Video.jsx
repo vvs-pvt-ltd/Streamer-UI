@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import VideoSrc from "../assets/video.mp4";
 import { useStateValue } from "../context/StateProvider";
 import HomeCards from "./HomeCards";
 import axios from "axios";
@@ -18,7 +17,6 @@ const Video = () => {
   const fetchVideoData = async () => {
     try {
       const { data } = await axios.get(`/video/videodata?video=${videoId}`);
-      // console.log(data);
       if (data.status === 200) {
         setFetched(true);
         setVideoData(data.payload[0]);
@@ -38,18 +36,6 @@ const Video = () => {
       console.log(error);
     }
   }, []);
-
-  // const videoData = {
-  // title:'ahjcsvjha'
-  //   videoUrl: VideoSrc,
-  //   description:
-  //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel laborum vero eveniet repudiandae incidunt aspernatur libero facere illum ab sequi enim maiores quae, quidem eaque soluta explicabo minima? Eligendi, optio!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel laborum vero eveniet repudiandae incidunt aspernatur libero facere illum ab sequi enim maiores quae, quidem eaque soluta explicabo minima? Eligendi, optio!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel laborum vero eveniet repudiandae incidunt aspernatur libero facere illum ab sequi enim maiores quae, quidem eaque soluta explicabo minima? Eligendi, optio!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel laborum vero eveniet repudiandae incidunt aspernatur libero facere illum ab sequi enim maiores quae, quidem eaque soluta explicabo minima? Eligendi, optio!",
-  //   id: 1,
-  //   avatar: "https://picsum.photos/100/100",
-  //   email: "viveksahu1762@gmail.com",
-  //   name: "Vishal Shah",
-  //   userName: "vwakesahu",
-  // };
 
   const msgArray = [
     {
