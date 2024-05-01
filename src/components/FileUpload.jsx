@@ -36,7 +36,7 @@ const FileUpload = () => {
         formData.append("totalChunks", totalChunks);
         formData.append("originalname", selectedFile.name);
 
-        fetch("http://localhost:9000/api/v1/video/upload", {
+        fetch("https://zk29l5cf-9000.inc1.devtunnels.ms/api/v1/video/upload", {
           method: "POST",
           body: formData,
         })
