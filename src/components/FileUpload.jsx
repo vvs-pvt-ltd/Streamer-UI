@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { AlertDialogDemo } from "./uploads/AlertDialouge";
+import axios from "axios";
 // import { Button } from "@mui/material";
 // import Progress from "../../components/progress";
 
@@ -6,10 +8,19 @@ const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState("");
   const [progress, setProgress] = useState(0);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
-  const handleFileChange = (event) => {
+  useEffect(() => {
+    if (isButtonClicked) {
+      handleFileUpload();
+      setIsButtonClicked(false);
+    }
+  }, [isButtonClicked]);
+
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+    setIsButtonClicked(true);
   };
 
   const handleFileUpload = () => {
@@ -36,12 +47,9 @@ const FileUpload = () => {
         formData.append("totalChunks", totalChunks);
         formData.append("originalname", selectedFile.name);
 
-        fetch("https://zk29l5cf-9000.inc1.devtunnels.ms/api/v1/video/upload", {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
+        axios
+          .post("/video/upload", formData)
+          .then(({ data }) => {
             console.log({ data });
             const temp = `Chunk ${
               chunkNumber + 1
@@ -67,13 +75,22 @@ const FileUpload = () => {
     uploadNextChunk();
   };
 
+  //   console.log(selectedFile)
+
   return (
     <div>
-      <h2>Resumable File Upload</h2>
+      <AlertDialogDemo
+        progress={progress}
+        selectedFile={selectedFile}
+        setSelectedFile={setSelectedFile}
+        handleFileChange={handleFileChange}
+        handleFileUpload={handleFileUpload}
+      />
+      {/* <h2>Resumable File Upload</h2>
       <h3>{status}</h3>
       {progress > 0 && `${progress}`}
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleFileUpload}>Upload File</button>
+      <button onClick={handleFileUpload}>Upload File</button> */}
     </div>
   );
 };
