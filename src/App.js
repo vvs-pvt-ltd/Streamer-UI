@@ -6,6 +6,7 @@ import Demo from "./components/Demo";
 import Dummy from "./components/dummy";
 import VideoUploader from "./components/VideoUpload";
 import Video from "./components/Video";
+import FileUpload from "./components/FileUpload";
 
 const App = () => {
   return (
@@ -18,7 +19,8 @@ const App = () => {
         </div>
         <div className="w-full px-6 pr-20">
           <Routes>
-            <Route path="/upload" element={<VideoUploader />} />
+            {/* <Route path="/upload" element={<VideoUploader />} /> */}
+            <Route path="/upload" element={<FileUpload />} />
             <Route path="/" element={<Home />} />
             <Route path="/trending" element={<Trending />} />
             {/* <Route path="/following" element={<Following />} /> */}

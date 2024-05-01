@@ -8,6 +8,31 @@ const VideoUpload = () => {
   const [{ user }] = useStateValue();
   console.log(user);
 
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
+    // if (!file) {
+    //   setMessage("Please select a file");
+    //   return;
+    // }
+
+    const formData = new FormData();
+    formData.append("Video", videoPhone);
+
+    try {
+      await axios.post("https://kf9319v1-8000.inc1.devtunnels.ms/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+      });
+      // setMessage("File uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      // setMessage("Error uploading file");
+    }
+  };
+
   const handleVideoUpload = async () => {
     try {
       const formData = new FormData();
@@ -15,11 +40,14 @@ const VideoUpload = () => {
       // formData.append("description", "Video First Description");
       formData.append("ispublic", true);
       formData.append("thumbnail", thumbnailPhone);
-      formData.append("video", videoPhone);
-      formData.append("email", "viveksahu1762@gmail.com");
+      formData.append("Video", videoPhone);
 
       const res = await axios.post("/video/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
       });
 
       console.log(res.data);
@@ -40,7 +68,7 @@ const VideoUpload = () => {
         onChange={(e) => setThumbnailPhone(e.target.files[0])}
         placeholder="Video"
       />
-      <button onClick={handleVideoUpload}>Submit</button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 };
