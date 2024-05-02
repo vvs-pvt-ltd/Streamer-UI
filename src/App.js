@@ -11,6 +11,7 @@ import UploadPage from "./pages/UploadPage";
 import { useStateValue } from "./context/StateProvider";
 import ProtectedRoute from "./auth/UserProtectedRoutes";
 import axios from "axios";
+import Profile from "./pages/Profile";
 
 const App = () => {
 
@@ -38,6 +39,11 @@ const App = () => {
             <Route path="/trending" element={<Trending />} />
             {/* <Route path="/following" element={<Following />} /> */}
             <Route path="/video/:video" element={<Video />} />
+            <Route path="/:user" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
             <Route path="/:user/following" element={<Following />} />
             <Route path="/playlist" element={<Playlist />} />
             <Route path="/your-videos" element={<YourVideos />} />

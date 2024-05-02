@@ -4,7 +4,7 @@ const Cards = ({ item, key, index }) => {
   return (
     <div
       key={index}
-      className="rounded-[30px] overflow-hidden h-[350px] bg-[#E2E2E2] relative"
+      className="rounded-[30px] overflow-hidden h-[350px] bg-muted relative"
     >
       <div className="aspect-video">
         <img src={item.thumbnail} className="h-full w-full" alt={item.title} />

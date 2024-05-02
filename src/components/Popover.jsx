@@ -1,6 +1,4 @@
 import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
 import AvatarImg from "../assets/img/avatar.png";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
@@ -10,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../components/ui/popover";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function PopoverDemo() {
   const [{ user }, dispatch] = useStateValue();
@@ -41,9 +39,16 @@ export function PopoverDemo() {
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         {user.authenticated && (
-          <Button variant="destructive" onClick={handleLogout}>
-            Logout
-          </Button>
+          <div className="grid gap-2">
+            <Link to={`/${user.username}`}>
+              <Button variant="outline" className="border-none outline-none">
+                Profile
+              </Button>
+            </Link>
+            <Button variant="destructive" onClick={handleLogout}>
+              Logout
+            </Button>
+          </div>
         )}
 
         {/* <div className="grid gap-4">

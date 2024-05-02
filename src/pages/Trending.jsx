@@ -1,11 +1,10 @@
 import React from "react";
-import TrendingIcon from "../assets/icons/trending.svg";
+import TrendyCards from "../components/trendy/TrendyCards";
 
 const Trending = () => {
   return (
-    <div className="flex">
-      <p>Trending</p>
-     
+    <div>
+      <TrendyCards />
     </div>
   );
 };

@@ -82,7 +82,7 @@ const Sidebar = () => {
           <button>Playlist</button>
         </div>
       </Link>
-      <Link to="/your-videos">
+      <Link to="/upload">
         <div
           className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
             activeButton === "/your-videos"

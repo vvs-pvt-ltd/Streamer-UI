@@ -1,16 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Cards from "./homeCards/Cards";
+import Cards from "../homeCards/Cards";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
-const HomeCards = () => {
+const TrendyCards = () => {
   const [homePageData, setHomePageData] = useState([]);
   const [isFetched, setIsFetched] = useState(false);
 
   const fetchHomeScreenData = async () => {
     try {
-      const response = await axios.get("/video/");
+      const response = await axios.get("/trending");
       // console.log(response);
       if (response.data.status === 200) {
         setHomePageData(response.data.payload);
@@ -49,7 +49,7 @@ const HomeCards = () => {
   );
 };
 
-export default HomeCards;
+export default TrendyCards;
 
 //   [
 //   {
