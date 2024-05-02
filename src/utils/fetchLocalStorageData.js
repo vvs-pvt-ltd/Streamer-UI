@@ -3,7 +3,7 @@ const userObj = {
   RefreshToken: null,
   email: null,
   username: null,
-  avartar: null,
+  avatar: null,
   _id: null,
   authenticated: false,
 }

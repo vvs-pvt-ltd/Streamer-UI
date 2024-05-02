@@ -9,9 +9,11 @@ import playlistIconSelected from "../assets/icons/playlistSelected.svg";
 import yourVideoIcon from "../assets/icons/your-video.svg";
 import yourVideoIconSelected from "../assets/icons/your-videoSelected.svg";
 import { GoHome } from "react-icons/go";
+import { useStateValue } from "../context/StateProvider";
 
 const Sidebar = () => {
   const [activeButton, setActiveButton] = useState();
+  const [{ user }] = useStateValue();
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
   };
@@ -43,61 +45,88 @@ const Sidebar = () => {
           }`}
         >
           {activeButton === "/trending" ? (
-            <img src={trendingIconSelected} />
+            <img src={trendingIconSelected} alt="trending-icon" />
           ) : (
-            <img src={trendingIcon} />
+            <img src={trendingIcon} alt="trending-icon" />
           )}
           <button>Trending</button>
         </div>
       </Link>
-      <Link to="/following">
-        <div
-          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
-            activeButton === "/following"
-              ? "bg-primary text-white"
-              : "text-textColor"
-          }`}
-        >
-          {activeButton === "/following" ? (
-            <img src={followingIconSelected} />
-          ) : (
-            <img src={followingIcon} />
-          )}
-          <button>Following</button>
-        </div>
-      </Link>
-      <Link to="/playlist">
-        <div
-          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
-            activeButton === "/playlist"
-              ? "bg-primary text-white"
-              : "text-textColor"
-          }`}
-        >
-          {activeButton === "/playlist" ? (
-            <img src={playlistIconSelected} />
-          ) : (
-            <img src={playlistIcon} />
-          )}
-          <button>Playlist</button>
-        </div>
-      </Link>
-      <Link to="/upload">
-        <div
-          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
-            activeButton === "/your-videos"
-              ? "bg-primary text-white"
-              : "text-textColor"
-          }`}
-        >
-          {activeButton === "/your-videos" ? (
-            <img src={yourVideoIconSelected} />
-          ) : (
-            <img src={yourVideoIcon} />
-          )}
-          <button>Your Videos</button>
-        </div>
-      </Link>
+      {user.authenticated && (
+        <Link to={`/${user.username}/following`}>
+          <div
+            className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+              activeButton === `/${user.username}/following`
+                ? "bg-primary text-white"
+                : "text-textColor"
+            }`}
+          >
+            {activeButton === `/${user.username}/following` ? (
+              <img src={followingIconSelected} alt="following-icon"/>
+            ) : (
+              <img src={followingIcon} alt="following-icon"/>
+            )}
+            <button>Following</button>
+          </div>
+        </Link>
+      )}
+
+      {user.authenticated && (
+        <Link to="/playlist">
+          <div
+            className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+              activeButton === "/playlist"
+                ? "bg-primary text-white"
+                : "text-textColor"
+            }`}
+          >
+            {activeButton === "/playlist" ? (
+              <img src={playlistIconSelected} alt="playlist-icon" />
+            ) : (
+              <img src={playlistIcon} alt="playlist-icon" />
+            )}
+            <button>Playlist</button>
+          </div>
+        </Link>
+      )}
+
+      {user.authenticated && (
+        <Link to="/upload">
+          <div
+            className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+              activeButton === "/upload"
+                ? "bg-primary text-white"
+                : "text-textColor"
+            }`}
+          >
+            {activeButton === "/upload" ? (
+              <img src={yourVideoIconSelected} alt="your-video" />
+            ) : (
+              <img src={yourVideoIcon} alt="your-video" />
+            )}
+            <button>Your Videos</button>
+          </div>
+        </Link>
+      )}
+
+      {!user.authenticated && (
+        <Link to="/login">
+          <div
+            className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+              activeButton === "/login"
+                ? "bg-primary text-white"
+                : "text-textColor"
+            }`}
+          >
+            {activeButton === "/login" ? (
+              <img src={yourVideoIconSelected} alt="login" />
+            ) : (
+              <img src={yourVideoIcon} alt="login" />
+            )}
+            <button>Login</button>
+          </div>
+        </Link>
+      )}
     </div>
   );
 };

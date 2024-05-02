@@ -20,7 +20,7 @@ root.render(
     <Toaster />
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/*" element={<App />} />
       </Routes>
     </Router>

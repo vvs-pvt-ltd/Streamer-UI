@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Checkbox } from "../../components/ui/checkbox";
+import { Checkbox } from "../ui/checkbox";
 
 import {
   Table,
@@ -18,7 +18,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table";
+} from "../ui/table";
+
+import { convertViewsToShortForm } from "../../utils/viewsCalculate";
 
 export function DataTableDemo({ data, setData, columns }) {
   const [sorting, setSorting] = useState([]);
@@ -71,30 +73,32 @@ export function DataTableDemo({ data, setData, columns }) {
         header: elm.label,
         cell: ({ row }) => (
           <div className="capitalize">
-            {elm.key === "createdAt" ? (
-              <div>
-                {row.original.createdAt.toLocaleString()}
-                {/* {console.log(row.original.createdAt.toLocaleString())} */}
-              </div>
-            ) : (
-              <div>
-                {elm.key === "ispublic" ? (
-                  row.getValue(elm.key).toString()
-                ) : (
-                  <div>
-                    {elm.key === "thumbnail" ? (
+            {(() => {
+              switch (elm.key) {
+                case "createdAt":
+                  return <div>{row.original.createdAt.toLocaleString()}</div>;
+                case "isActive":
+                  return <div>{row.getValue(elm.key).toString()}</div>;
+                case "subscribers":
+                case "totalVideos":
+                case "totalViews":
+                  return (
+                    <div>{convertViewsToShortForm(row.getValue(elm.key))}</div>
+                  );
+                case "avatar":
+                  return (
+                    <div>
                       <img
                         src={row.getValue(elm.key)}
-                        alt="thubnail"
-                        className="w-20"
+                        alt="thumbnail"
+                        className="w-10 h-10 rounded-full"
                       />
-                    ) : (
-                      row.getValue(elm.key)
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
+                    </div>
+                  );
+                default:
+                  return <div>{row.getValue(elm.key)}</div>;
+              }
+            })()}
           </div>
         ),
       });

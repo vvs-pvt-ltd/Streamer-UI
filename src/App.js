@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import { Following, Home, Playlist, Trending, YourVideos } from "./pages";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { Following, Home, Login, Playlist, Trending, YourVideos } from "./pages";
 import { Navbar, Sidebar, StreamVideo, WatchVideo } from "./components";
 import Demo from "./components/Demo";
 import Dummy from "./components/dummy";
-import VideoUploader from "./components/VideoUpload";
 import Video from "./components/Video";
-import FileUpload from "./components/FileUpload";
 import UploadPage from "./pages/UploadPage";
 import { useStateValue } from "./context/StateProvider";
 import ProtectedRoute from "./auth/UserProtectedRoutes";
@@ -15,7 +13,6 @@ import Profile from "./pages/Profile";
 
 const App = () => {
 
-  const [authenticated, setAuthenticated] = useState(false);
   const [{ user }] = useStateValue();
   axios.defaults.headers.common["Authorization"] = `Bearer ${user.AccessToken}`;
 
@@ -51,6 +48,8 @@ const App = () => {
             <Route path="/stream-video" element={<StreamVideo />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/dummy" element={<Dummy />} />
+            <Route path="/login" element={<Login />} />
+            
             {/* <Route path="/app" ></Route> */}
           </Routes>
         </div>

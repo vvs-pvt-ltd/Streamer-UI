@@ -17,7 +17,7 @@ const Login = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       {isSignupClicked ? (
         <SignupForm
           isSignupClicked={isSignupClicked}
