@@ -10,11 +10,14 @@ import FileUpload from "./components/FileUpload";
 import UploadPage from "./pages/UploadPage";
 import { useStateValue } from "./context/StateProvider";
 import ProtectedRoute from "./auth/UserProtectedRoutes";
+import axios from "axios";
 
 const App = () => {
+
   const [authenticated, setAuthenticated] = useState(false);
   const [{ user }] = useStateValue();
-  console.log(user)
+  // console.log(user)
+  axios.defaults.headers.common["Authorization"] = `Bearer ${user.AccessToken}`;
 
   const checkAuthentication = () => {
     const isLoggedIn = user?.authenticated ? true : false;

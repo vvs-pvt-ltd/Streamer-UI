@@ -13,7 +13,7 @@ import { Toaster } from "sonner";
 import axios from "axios";
 const baseURL = process.env.REACT_APP_BACKEND_URI
 axios.defaults.baseURL = baseURL;
-axios.defaults.headers.common["Authorization"] = "Auth Token";
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
