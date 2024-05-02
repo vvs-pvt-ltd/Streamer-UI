@@ -11,12 +11,11 @@ import {
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
 import { Button } from "../../components/ui/button";
-import { Input } from "../ui/input";
-import Lottie from "lottie-react";
-import AnimationData from "../../assets/demo.lottie";
-// import AnimationData from "../../assets/waiting.json";
-import { Progress } from "../ui/progress";
 import "@dotlottie/player-component";
+import UploadComplete from "./UploadComplete";
+import Uploading from "./Uploading";
+import SelectFile from "./SelectFile";
+import { toast } from "sonner";
 
 export function AlertDialogDemo({
   progress,
@@ -26,15 +25,37 @@ export function AlertDialogDemo({
   setSelectedFile,
 }) {
   const [isOpen, setIsOpen] = useState(true);
-  const [progressCompleted, setProgressCompleted] = useState(false);
+  const [progressCompleted, setProgressCompleted] = useState(true);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
+  const [thumbnail, setThumbnail] = useState(null);
+
+  const handleSave = () => {
+    if (!title || !description || !thumbnail) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+
+    const data = {
+      title: title,
+      description: description,
+      isPublic: isPublic,
+      thumbnail: thumbnail,
+    };
+
+    console.log(data);
+  };
+
+  const handleChange = (e, setfunc) => {
+    setfunc(e.target.value);
+  };
 
   useEffect(() => {
     setTimeout(() => {
       if (progress === 100) setProgressCompleted(true);
     }, 3200);
   }, [progress]);
-
-//   console.log(progress);
 
   return (
     <AlertDialog open={isOpen}>
@@ -43,56 +64,37 @@ export function AlertDialogDemo({
           Show Dialog
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="min-h-[700px] max-w-6xl grid gap-0 grid-rows-6">
+      <AlertDialogContent className="max-h-[700px] max-w-6xl grid gap-0 grid-rows-12">
         <AlertDialogHeader className={"row-span-1"}>
           <AlertDialogTitle>
             {selectedFile !== null ? "Details" : "Upload Video"}
           </AlertDialogTitle>
         </AlertDialogHeader>
 
-        <div className="h-full w-full grid items-center justify-center pb-20 row-span-5">
+        <div className="overflow-auto px-2 h-full w-full grid items-center justify-center row-span-11 grid-cols-1">
           {progress === 0 && !progressCompleted && selectedFile === null && (
-            <Input
-              type="file"
-              onChange={handleFileChange}
-              className="max-w-xs"
-            />
+            <SelectFile handleFileChange={handleFileChange} />
           )}
 
           {progress !== 100 && selectedFile !== null && (
-            <div>
-              <dotlottie-player
-                src={AnimationData}
-                autoplay
-                loop
-                style={{ height: "400px", width: "auto" }}
-              />
-              <p className="text-center">
-                Hang on mate! We're uploading your video
-              </p>
-              <Progress value={progress} className="w-full mt-6" />
-              <p className="text-center mt-3">
-                <span className="text-lg font-semibold">{`${Math.floor(
-                  progress
-                )}% `}</span>
-                Completed
-              </p>
-            </div>
+            <Uploading progress={progress} />
           )}
 
           {progressCompleted && (
-            <div>
-              <p>Wohoooo ! done</p>
-            </div>
+            <UploadComplete
+              title={title}
+              setTitle={setTitle}
+              handleChange={handleChange}
+              description={description}
+              setDescription={setDescription}
+              isPublic={isPublic}
+              setIsPublic={setIsPublic}
+              thumbnail={thumbnail}
+              setThumbnail={setThumbnail}
+              handleSave={handleSave}
+            />
           )}
         </div>
-
-        {/* <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setIsOpen(false)}>
-            Cancel
-          </AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter> */}
       </AlertDialogContent>
     </AlertDialog>
   );

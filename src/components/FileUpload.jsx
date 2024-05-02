@@ -7,7 +7,7 @@ import axios from "axios";
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState("");
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(40);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   useEffect(() => {
