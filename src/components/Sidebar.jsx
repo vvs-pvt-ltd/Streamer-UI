@@ -8,6 +8,7 @@ import playlistIcon from "../assets/icons/playlist.svg";
 import playlistIconSelected from "../assets/icons/playlistSelected.svg";
 import yourVideoIcon from "../assets/icons/your-video.svg";
 import yourVideoIconSelected from "../assets/icons/your-videoSelected.svg";
+import { GoHome } from "react-icons/go";
 
 const Sidebar = () => {
   const [activeButton, setActiveButton] = useState();
@@ -24,13 +25,12 @@ const Sidebar = () => {
     <div className="flex flex-col gap-2 w-full px-8">
       <Link to="/">
         <div
-          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
-            activeButton === "/"
-              ? "bg-primaryColor text-white"
-              : "text-textColor"
+          className={`w-full flex items-center justify-start gap-3 py-3 px-5 rounded-xl ${
+            activeButton === "/" ? "bg-primary text-white" : "text-textColor"
           }`}
         >
           {/* <img src={TrendingIcon} /> */}
+          <GoHome className="text-xl" />
           <button>Home</button>
         </div>
       </Link>
@@ -38,7 +38,7 @@ const Sidebar = () => {
         <div
           className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
             activeButton === "/trending"
-              ? "bg-primaryColor text-white"
+              ? "bg-primary text-white"
               : "text-textColor"
           }`}
         >
@@ -54,7 +54,7 @@ const Sidebar = () => {
         <div
           className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
             activeButton === "/following"
-              ? "bg-primaryColor text-white"
+              ? "bg-primary text-white"
               : "text-textColor"
           }`}
         >
@@ -70,7 +70,7 @@ const Sidebar = () => {
         <div
           className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
             activeButton === "/playlist"
-              ? "bg-primaryColor text-white"
+              ? "bg-primary text-white"
               : "text-textColor"
           }`}
         >
@@ -86,7 +86,7 @@ const Sidebar = () => {
         <div
           className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
             activeButton === "/your-videos"
-              ? "bg-primaryColor text-white"
+              ? "bg-primary text-white"
               : "text-textColor"
           }`}
         >

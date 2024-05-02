@@ -14,8 +14,6 @@ import axios from "axios";
 const baseURL = process.env.REACT_APP_BACKEND_URI
 axios.defaults.baseURL = baseURL;
 
-
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StateProvider initialState={initialState} reducer={reducer}>

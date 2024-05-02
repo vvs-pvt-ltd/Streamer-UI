@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import HomeCards from "./HomeCards";
 import axios from "axios";
+import { Button } from "./ui/button";
+import { ThumbsUp } from "lucide-react";
 
 const Video = () => {
   const location = useLocation();
@@ -122,24 +124,36 @@ const Video = () => {
           </div>
 
           {/*Video DATA */}
-          <div className="bg-gray-200 mt-4 rounded-xl p-6">
-            <p className="text-2xl font-semibold">Some Title</p>
+          <div className="bg-gray-200 mt-4 rounded-xl p-6 grid gap-3">
+            <p className="text-2xl font-semibold capitalize">
+              {videoData.title}
+            </p>
+
             <div className="flex w-full">
-              <div className="flex w-full items-center justify-center gap-2">
+              <div className="flex w-full items-center justify-start gap-2">
                 <img
                   src={videoData.avatar}
                   alt="profile_image"
-                  className="w-16 h-16 rounded-full"
+                  className="w-10 h-10 rounded-full"
                 ></img>
-                <div className="flex flex-col items-center justify-center">
-                  <p className="text-lg font-semibold">{videoData.userName}</p>
-                  <button className="px-4 py-2 bg-red-500 rounded-lg text-white hover:bg-red-600">
-                    Subscribe
-                  </button>
+                <div className="flex flex-col items-start justify-center">
+                  <p className="text-lg font-semibold leading-4">
+                    {videoData.userName}
+                  </p>
+                  <p className="text-sm">10000 Subcribers</p>
                 </div>
               </div>
-              <p>{videoData.description}</p>
+
+              <div className="flex gap-3">
+                <Button variant="outline">
+                  <ThumbsUp />
+                  &nbsp;Like
+                </Button>
+              </div>
             </div>
+            <p className="text-sm font-medium text-muted-foreground">
+              {videoData.description}
+            </p>
           </div>
 
           <HomeCards />

@@ -40,7 +40,7 @@ const HomeCards = () => {
           ))}
         </div>
       ) : (
-        "Loading..."
+        <p className="w-full text-center pb-36">Loading...</p>
       )}
     </div>
   );
