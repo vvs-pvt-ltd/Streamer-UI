@@ -11,8 +11,8 @@ const Video = () => {
   const path = location.pathname.split("/");
   const videoId = path[path.length - 1];
   // const videoId = "662e9363fc2eff8ae57ec94b";
-  const { user } = useStateValue();
-  const userEmail = "viveksahu1762@gmail.com";
+  const [{ user }] = useStateValue();
+  const userEmail = user.email;
   const [fetched, setFetched] = useState(false);
 
   const [videoData, setVideoData] = useState(null);
@@ -75,7 +75,7 @@ const Video = () => {
           <div className="grid w-full md:grid-cols-7 grid-cols-1 gap-4">
             <div className="col-span-5 h-[32rem] flex justify-center">
               <video
-                src={`${process.env.REACT_APP_BACKEND_URI}/video/view?id=${videoData?.video}`}
+                src={`${process.env.REACT_APP_BACKEND_URI}/video/view?id=${videoData?.video}&user=${user.username}`}
                 autoPlay
                 controls
                 className="h-full w-full"

@@ -12,7 +12,7 @@ const PlaylistCards = () => {
 
   const fetchHomeScreenData = async () => {
     try {
-      const response = await axios.get(`${user.username}/following`);
+      const response = await axios.get(`/playlist?user=${user.username}`);
       // console.log(response);
       if (response.data.status === 200) {
         setHomePageData(response.data.payload);
