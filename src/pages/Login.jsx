@@ -9,6 +9,7 @@ const Login = () => {
   const [isSignupClicked, setIsSignupClicked] = useState(false);
   const [{ user }] = useStateValue();
   const navigate = useNavigate();
+  console.log(user?.authenticated)
 
   useEffect(() => {
     if (user?.authenticated) navigate("/");

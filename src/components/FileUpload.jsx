@@ -82,22 +82,15 @@ const FileUpload = () => {
   //   console.log(selectedFile)
 
   return (
-    <div>
-      <AlertDialogDemo
-        videoId={videoId}
-        progress={progress}
-        setProgress={setProgress}
-        selectedFile={selectedFile}
-        setSelectedFile={setSelectedFile}
-        handleFileChange={handleFileChange}
-        handleFileUpload={handleFileUpload}
-      />
-      {/* <h2>Resumable File Upload</h2>
-      <h3>{status}</h3>
-      {progress > 0 && `${progress}`}
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleFileUpload}>Upload File</button> */}
-    </div>
+    <AlertDialogDemo
+      videoId={videoId}
+      progress={progress}
+      setProgress={setProgress}
+      selectedFile={selectedFile}
+      setSelectedFile={setSelectedFile}
+      handleFileChange={handleFileChange}
+      handleFileUpload={handleFileUpload}
+    />
   );
 };
 

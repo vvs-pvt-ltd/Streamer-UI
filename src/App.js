@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { Following, Home, Playlist, Trending, YourVideos } from "./pages";
 import { Navbar, Sidebar, StreamVideo, WatchVideo } from "./components";
 import Demo from "./components/Demo";
@@ -7,8 +7,20 @@ import Dummy from "./components/dummy";
 import VideoUploader from "./components/VideoUpload";
 import Video from "./components/Video";
 import FileUpload from "./components/FileUpload";
+import UploadPage from "./pages/UploadPage";
+import { useStateValue } from "./context/StateProvider";
+import ProtectedRoute from "./auth/UserProtectedRoutes";
 
 const App = () => {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [{ user }] = useStateValue();
+  console.log(user)
+
+  const checkAuthentication = () => {
+    const isLoggedIn = user?.authenticated ? true : false;
+    return isLoggedIn
+  };
+
   return (
     <div className="text-textColor">
       <Navbar />
@@ -19,7 +31,12 @@ const App = () => {
         </div>
         <div className="w-full px-6 pr-20">
           <Routes>
-            <Route path="/upload" element={<FileUpload />} />
+            {/* Protect the /upload route */}
+            <Route path="/upload" element={
+              <ProtectedRoute>
+                <UploadPage />
+              </ProtectedRoute>
+            } />
             <Route path="/" element={<Home />} />
             <Route path="/trending" element={<Trending />} />
             {/* <Route path="/following" element={<Following />} /> */}
@@ -38,5 +55,14 @@ const App = () => {
     </div>
   );
 };
+
+
+// const ProtectedRoute = ({ element, isAuthenticated, ...rest }) => {
+//   return isAuthenticated ? (
+//     <Route {...rest} element={element} />
+//   ) : (
+//     <Navigate to="/login" />
+//   );
+// };
 
 export default App;

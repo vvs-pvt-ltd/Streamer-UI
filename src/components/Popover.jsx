@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 export function PopoverDemo() {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
-  //   console.log(user);
   const logoutObj = {
     AccessToken: null,
     RefreshToken: null,
@@ -41,9 +40,12 @@ export function PopoverDemo() {
         <img src={AvatarImg} alt="avatar" className="w-11 h-11 rounded-full" />
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
-        <Button variant="destructive" onClick={handleLogout}>
-          Logout
-        </Button>
+        {user.authenticated && (
+          <Button variant="destructive" onClick={handleLogout}>
+            Logout
+          </Button>
+        )}
+
         {/* <div className="grid gap-4">
           <div className="space-y-2">
             <h4 className="font-medium leading-none">Dimensions</h4>

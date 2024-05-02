@@ -18,6 +18,7 @@ import SelectFile from "./SelectFile";
 import { IoClose } from "react-icons/io5";
 import { toast } from "sonner";
 import axios from "axios";
+import { useStateValue } from "../../context/StateProvider";
 
 export function AlertDialogDemo({
   setProgress,
@@ -28,6 +29,7 @@ export function AlertDialogDemo({
   selectedFile,
   setSelectedFile,
 }) {
+  const [{ user }] = useStateValue();
   const [isOpen, setIsOpen] = useState(false);
   const [progressCompleted, setProgressCompleted] = useState(false);
   const [title, setTitle] = useState("");
@@ -58,9 +60,19 @@ export function AlertDialogDemo({
     formData.append("description", description);
     formData.append("thumbnail", thumbnail);
     formData.append("ispublic", isPublic);
+    formData.append("video", videoId);
+    formData.append("usertoken", user.AccessToken);
 
-    const { data } = await axios.put("/video/uploadvideodata", formData);
-    console.log(data);
+    try {
+      const { data } = await axios.post("/video/uploadvideodata", formData);
+      console.log(data);
+      if (data.status === 200) {
+        handleClose();
+      }
+    } catch (error) {
+      console.log(error);
+      toast(error.message);
+    }
   };
 
   const handleChange = (e, setfunc) => {
@@ -76,8 +88,12 @@ export function AlertDialogDemo({
   return (
     <AlertDialog open={isOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" onClick={() => setIsOpen(true)}>
-          Show Dialog
+        <Button
+          variant="outline"
+          className="m-0"
+          onClick={() => setIsOpen(true)}
+        >
+          Upload Video
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="min-h-[650px] max-h-[650px] max-w-6xl grid gap-0 grid-rows-12">

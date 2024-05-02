@@ -1,15 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import { useStateValue } from "../context/StateProvider";
-import React, { useEffect } from "react";
+import { useStateValue } from '../context/StateProvider';
+import React from 'react'
+import { Navigate, useLocation } from "react-router-dom"
 
-const UserProtectedRoutes = ({ chidren }) => {
+const ProtectedRoute = ({ children }) => {
   const [{ user }] = useStateValue();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (user) navigate("/");
-  }, [user]);
+  let location = useLocation();
 
-  return <div>{chidren}</div>;
+  if (!user.authenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />
+  }
+  return children
+
 };
 
-export default UserProtectedRoutes;
+export default ProtectedRoute;
