@@ -1,9 +1,12 @@
-import React from 'react'
+import PlaylistCards from "../components/playlist/PlaylistCards";
+import React from "react";
 
 const Playlist = () => {
   return (
-    <div>Playlist</div>
-  )
-}
+    <div>
+      <PlaylistCards />
+    </div>
+  );
+};
 
-export default Playlist
+export default Playlist;

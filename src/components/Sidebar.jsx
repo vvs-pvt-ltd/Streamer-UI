@@ -62,9 +62,9 @@ const Sidebar = () => {
             }`}
           >
             {activeButton === `/${user.username}/following` ? (
-              <img src={followingIconSelected} alt="following-icon"/>
+              <img src={followingIconSelected} alt="following-icon" />
             ) : (
-              <img src={followingIcon} alt="following-icon"/>
+              <img src={followingIcon} alt="following-icon" />
             )}
             <button>Following</button>
           </div>
@@ -72,15 +72,15 @@ const Sidebar = () => {
       )}
 
       {user.authenticated && (
-        <Link to="/playlist">
+        <Link to={`/${user.username}/playlist`}>
           <div
             className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
-              activeButton === "/playlist"
+              activeButton === `/${user.username}/playlist`
                 ? "bg-primary text-white"
                 : "text-textColor"
             }`}
           >
-            {activeButton === "/playlist" ? (
+            {activeButton === `/${user.username}/playlist` ? (
               <img src={playlistIconSelected} alt="playlist-icon" />
             ) : (
               <img src={playlistIcon} alt="playlist-icon" />

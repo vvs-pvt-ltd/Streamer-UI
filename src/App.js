@@ -42,7 +42,7 @@ const App = () => {
               </ProtectedRoute>
             } />
             <Route path="/:user/following" element={<Following />} />
-            <Route path="/playlist" element={<Playlist />} />
+            <Route path="/:user/playlist" element={<Playlist />} />
             <Route path="/your-videos" element={<YourVideos />} />
             <Route path="/watch-video" element={<WatchVideo />} />
             <Route path="/stream-video" element={<StreamVideo />} />
