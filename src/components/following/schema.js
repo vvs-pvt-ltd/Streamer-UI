@@ -12,25 +12,25 @@ export const followingSchema = {
             label: "Username",
             key: "username",
         },
-        {
-            label: "Description",
-            key: "description",
-        },
-        {
-            label: "Total Videos",
-            key: "totalVideos",
-        },
-        {
-            label: "Total Views",
-            key: "totalViews",
-        },
-        {
-            label: "Active",
-            key: "isActive",
-        },
-        {
-            label: "Subscribers",
-            key: "subscribers",
-        },
+        // {
+        //     label: "Description",
+        //     key: "description",
+        // },
+        // {
+        //     label: "Total Videos",
+        //     key: "totalVideos",
+        // },
+        // {
+        //     label: "Total Views",
+        //     key: "totalViews",
+        // },
+        // {
+        //     label: "Active",
+        //     key: "isActive",
+        // },
+        // {
+        //     label: "Subscribers",
+        //     key: "subscribers",
+        // },
     ],
 };

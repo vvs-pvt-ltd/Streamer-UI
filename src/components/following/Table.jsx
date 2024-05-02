@@ -21,6 +21,7 @@ import {
 } from "../ui/table";
 
 import { convertViewsToShortForm } from "../../utils/viewsCalculate";
+import { Link } from "react-router-dom";
 
 export function DataTableDemo({ data, setData, columns }) {
   const [sorting, setSorting] = useState([]);
@@ -170,10 +171,12 @@ export function DataTableDemo({ data, setData, columns }) {
                 >
                   {row.getVisibleCells().map((cell, index) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      <Link to={`/${row.original.username}`}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </Link>
                     </TableCell>
                   ))}
                 </TableRow>

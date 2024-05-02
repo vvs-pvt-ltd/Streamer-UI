@@ -104,7 +104,7 @@ const Sidebar = () => {
             ) : (
               <img src={yourVideoIcon} alt="your-video" />
             )}
-            <button>Your Videos</button>
+            <button>My Video</button>
           </div>
         </Link>
       )}

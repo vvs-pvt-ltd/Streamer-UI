@@ -4,40 +4,19 @@ import Cards from "../homeCards/Cards";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
-const TrendyCards = () => {
-  const [homePageData, setHomePageData] = useState([]);
+const ProfileCards = ({ profilePageData }) => {
   const [isFetched, setIsFetched] = useState(false);
 
-  const fetchHomeScreenData = async () => {
-    try {
-      const response = await axios.get("/video/trending");
-      // console.log(response);
-      if (response.data.status === 200) {
-        setHomePageData(response.data.payload);
-        console.log(response.data.payload);
-        setIsFetched(true);
-      }
-    } catch (error) {
-      console.log(error);
-      setIsFetched(true);
-      toast.error(error.message);
-    }
-  };
-  useEffect(() => {
-    fetchHomeScreenData();
-  }, []);
-
-  if (isFetched && homePageData.length === 0)
+  if (isFetched && profilePageData.length === 0)
     return <div>No Data is available</div>;
 
   return (
     <div className="mt-8">
       {/* <p>Other Streams</p> */}
-      {homePageData.length > 0 && isFetched ? (
+      {profilePageData.length > 0 ? (
         <div className="grid grid-cols-3 gap-8 pb-10">
-          {homePageData.map((item, index) => (
+          {profilePageData.map((item, index) => (
             <Link to={`/video/${item._id}`}>
-              {console.log(item)}
               <Cards index={index} item={item} key={item.id} />
             </Link>
           ))}
@@ -49,7 +28,7 @@ const TrendyCards = () => {
   );
 };
 
-export default TrendyCards;
+export default ProfileCards;
 
 //   [
 //   {

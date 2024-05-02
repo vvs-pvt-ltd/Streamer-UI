@@ -1,14 +1,18 @@
+import axios from "axios";
 import { followingSchema } from "../components/following/schema";
 import { DataTableDemo } from "../components/following/Table";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const Following = () => {
-  const [data, setData] = useState([
+  const [fetched, setFetched] = useState(false);
+  const dummyData = [
     {
       id: 1,
       avatar: "https://picsum.photos/100/100?random=1",
       username: "channelUser1",
-      description: "Welcome to Channel 1! We bring you the latest in entertainment.",
+      description:
+        "Welcome to Channel 1! We bring you the latest in entertainment.",
       totalVideos: 50,
       totalViews: 10000,
       isActive: true,
@@ -34,10 +38,35 @@ const Following = () => {
       isActive: false,
       subscribers: 10000,
     },
-  ]);
+  ];
+  const [data, setData] = useState([]);
+
+  const getFollowingData = async () => {
+    try {
+      const { data } = await axios.get("/subscribed/");
+      console.log(data);
+      setData(data.payload);
+      setFetched(true);
+    } catch (error) {
+      toast.error(error.message);
+      setFetched(true);
+    }
+  };
+  console.log(data)
+
+  useEffect(() => {
+    getFollowingData();
+  }, []);
+
   return (
     <div>
-      <DataTableDemo setData={setData} data={data} columns={followingSchema.columns} />
+      {fetched && data.length > 0 && (
+        <DataTableDemo
+          setData={setData}
+          data={data}
+          columns={followingSchema.columns}
+        />
+      )}
     </div>
   );
 };
