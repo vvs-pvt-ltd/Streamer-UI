@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Cards from "./homeCards/Cards";
+import { Link } from "react-router-dom";
 
 const HomeCards = () => {
   const [homePageData, setHomePageData] = useState([]);
@@ -12,7 +13,7 @@ const HomeCards = () => {
       // console.log(response);
       if (response.data.status === 200) {
         setHomePageData(response.data.payload);
-        console.log(response.data.payload)
+        console.log(response.data.payload);
         setIsFetched(true);
       }
     } catch (error) {
@@ -32,7 +33,10 @@ const HomeCards = () => {
       {homePageData.length > 0 && isFetched ? (
         <div className="grid grid-cols-3 gap-8 pb-10">
           {homePageData.map((item, index) => (
-            <Cards index={index} item={item} key={item.id} />
+            <Link to={`/video/${item._id}`}>
+              {console.log(item)}
+              <Cards index={index} item={item} key={item.id} />
+            </Link>
           ))}
         </div>
       ) : (

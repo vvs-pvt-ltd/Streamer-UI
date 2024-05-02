@@ -16,13 +16,7 @@ const App = () => {
 
   const [authenticated, setAuthenticated] = useState(false);
   const [{ user }] = useStateValue();
-  // console.log(user)
   axios.defaults.headers.common["Authorization"] = `Bearer ${user.AccessToken}`;
-
-  const checkAuthentication = () => {
-    const isLoggedIn = user?.authenticated ? true : false;
-    return isLoggedIn
-  };
 
   return (
     <div className="text-textColor">

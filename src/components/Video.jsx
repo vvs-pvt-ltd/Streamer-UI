@@ -19,7 +19,7 @@ const Video = () => {
       const { data } = await axios.get(`/video/videodata?video=${videoId}`);
       if (data.status === 200) {
         setFetched(true);
-        setVideoData(data.payload[0]);
+        setVideoData(data.payload);
         console.log(data);
         // setVideoData()
       }
@@ -73,7 +73,7 @@ const Video = () => {
           <div className="grid w-full md:grid-cols-7 grid-cols-1 gap-4">
             <div className="col-span-5 h-[32rem] flex justify-center">
               <video
-                src={`${process.env.REACT_APP_BACKEND_URI}/api/v1/video/view?id=${videoData.video}`}
+                src={`${process.env.REACT_APP_BACKEND_URI}/video/view?id=${videoData?.video}`}
                 autoPlay
                 controls
                 className="h-full w-full"
