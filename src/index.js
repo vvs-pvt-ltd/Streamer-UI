@@ -11,8 +11,8 @@ import reducer from "./context/reducer";
 import { Toaster } from "sonner";
 
 import axios from "axios";
-
-axios.defaults.baseURL = `${process.env.REACT_APP_BACKEND_URI}/api/v1`;
+const baseURL = process.env.REACT_APP_BACKEND_URI
+axios.defaults.baseURL = baseURL;
 axios.defaults.headers.common["Authorization"] = "Auth Token";
 
 

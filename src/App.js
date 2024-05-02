@@ -19,7 +19,6 @@ const App = () => {
         </div>
         <div className="w-full px-6 pr-20">
           <Routes>
-            {/* <Route path="/upload" element={<VideoUploader />} /> */}
             <Route path="/upload" element={<FileUpload />} />
             <Route path="/" element={<Home />} />
             <Route path="/trending" element={<Trending />} />

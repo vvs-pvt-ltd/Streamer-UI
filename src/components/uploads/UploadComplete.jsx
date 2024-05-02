@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import videoFile from "../../assets/ss.mp4";
 
 const UploadComplete = ({
+  videoId,
   title,
   handleChange,
   setTitle,
@@ -18,13 +19,16 @@ const UploadComplete = ({
   thumbnail,
   setThumbnail,
 }) => {
+
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     setThumbnail(file);
   };
+  const videoURI = `${process.env.REACT_APP_BACKEND_URI}/video/view?id=${videoId}`;
+  // console.log(videoURI)
 
   return (
-    <div className="w-full h-full grid grid-cols-3 gap-2">
+    <div className="w-full h-full grid grid-cols-3 gap-4">
       <div className="col-span-2">
         <p className="text-2xl font-semibold">Details</p>
         <div className="mt-4">
@@ -95,7 +99,7 @@ const UploadComplete = ({
         </Button>
       </div>
       <div className="col-span-1">
-        <video src={videoFile} autoPlay muted loop />
+        <video src={videoURI} autoPlay muted loop className="rounded-lg" />
       </div>
     </div>
   );

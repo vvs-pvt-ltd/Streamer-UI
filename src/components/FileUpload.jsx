@@ -7,8 +7,9 @@ import axios from "axios";
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState("");
-  const [progress, setProgress] = useState(40);
+  const [progress, setProgress] = useState(0);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [videoId, setVideoId] = useState(null);
 
   useEffect(() => {
     if (isButtonClicked) {
@@ -51,6 +52,9 @@ const FileUpload = () => {
           .post("/video/upload", formData)
           .then(({ data }) => {
             console.log({ data });
+            if (data.status === 200) {
+              setVideoId(data.payload);
+            }
             const temp = `Chunk ${
               chunkNumber + 1
             }/${totalChunks} uploaded successfully`;
@@ -80,7 +84,9 @@ const FileUpload = () => {
   return (
     <div>
       <AlertDialogDemo
+        videoId={videoId}
         progress={progress}
+        setProgress={setProgress}
         selectedFile={selectedFile}
         setSelectedFile={setSelectedFile}
         handleFileChange={handleFileChange}

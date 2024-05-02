@@ -12,8 +12,12 @@ const Uploading = ({ progress }) => {
         loop
         style={{ height: "400px", width: "auto" }}
       />
-      <p className="text-center">Hang on mate! We're uploading your video</p>
-      <Progress value={progress} className="w-full mt-6" />
+
+      <div className="grid items-center justify-center">
+        <p className="text-center">Hang on mate! We're uploading your video</p>
+        <Progress value={progress} className="mt-6" />
+      </div>
+
       <p className="text-center mt-3">
         <span className="text-lg font-semibold">{`${Math.floor(
           progress
