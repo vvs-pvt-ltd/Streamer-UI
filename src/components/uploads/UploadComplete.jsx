@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
@@ -18,7 +18,6 @@ const UploadComplete = ({
   thumbnail,
   setThumbnail,
 }) => {
-
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     setThumbnail(file);
@@ -63,8 +62,7 @@ const UploadComplete = ({
               thumbnail
                 ? "border flex items-center justify-center"
                 : "bg-gray-200"
-            }`}
-          >
+            }`}>
             {thumbnail ? (
               <div className="h-full w-full flex items-center justify-center relative">
                 <img
