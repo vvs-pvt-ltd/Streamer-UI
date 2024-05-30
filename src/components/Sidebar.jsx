@@ -24,7 +24,7 @@ const Sidebar = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex flex-col gap-2 w-full px-8">
+    <div className="flex flex-col gap-2 w-full md:px-8">
       <Link to="/">
         <div
           className={`w-full flex items-center justify-start gap-3 py-3 px-5 rounded-xl ${
@@ -66,7 +66,7 @@ const Sidebar = () => {
             ) : (
               <img src={followingIcon} alt="following-icon" />
             )}
-            <button>Following</button>
+            <button>Subcribed</button>
           </div>
         </Link>
       )}

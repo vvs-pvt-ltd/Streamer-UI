@@ -111,8 +111,7 @@ export function LoginForm({ setIsSignupClicked }) {
           Don&apos;t have an account?{" "}
           <p
             className="underline cursor-pointer"
-            onClick={() => setIsSignupClicked(true)}
-          >
+            onClick={() => setIsSignupClicked(true)}>
             Sign up
           </p>
         </div>

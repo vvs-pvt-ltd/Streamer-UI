@@ -1,14 +1,20 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Cards from "../homeCards/Cards";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
+import Loader from "../loader";
+import NotFoundImg from "../../assets/img/404-not-found.json";
+import Lottie from "lottie-react";
 
 const ProfileCards = ({ profilePageData }) => {
-  const [isFetched, setIsFetched] = useState(false);
+  console.log(profilePageData.length);
 
-  if (isFetched && profilePageData.length === 0)
-    return <div>No Data is available</div>;
+  if (profilePageData.length === 0)
+    return (
+      <div className="flex flex-col items-center mt-12 md:mt-0">
+        <Lottie className="md:max-w-2xl" animationData={NotFoundImg} />
+        <p className="text-xl text-muted-foreground">No Videos Available</p>
+      </div>
+    );
 
   return (
     <div className="mt-8">
@@ -22,7 +28,9 @@ const ProfileCards = ({ profilePageData }) => {
           ))}
         </div>
       ) : (
-        <p className="w-full text-center pb-36">Loading...</p>
+        <div className="w-full text-center pb-36 mt-24">
+          <Loader />
+        </div>
       )}
     </div>
   );

@@ -71,7 +71,7 @@ export function SignupForm({ setIsSignupClicked }) {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto max-w-sm h-auto mb-8">
       <CardHeader>
         <CardTitle className="text-xl">Sign Up</CardTitle>
         <CardDescription>
@@ -137,7 +137,7 @@ export function SignupForm({ setIsSignupClicked }) {
             Create an account
           </Button>
           <Button variant="outline" className="w-full">
-            Sign up with GitHub
+            Sign up with Google
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
@@ -145,8 +145,7 @@ export function SignupForm({ setIsSignupClicked }) {
           <p
             href="#"
             className="underline cursor-pointer"
-            onClick={() => setIsSignupClicked(false)}
-          >
+            onClick={() => setIsSignupClicked(false)}>
             Sign in
           </p>
         </div>

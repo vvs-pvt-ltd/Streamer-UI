@@ -6,6 +6,7 @@ import { AlertDialogDemo } from "../components/profile/alertDemo";
 import axios from "axios";
 import { toast } from "sonner";
 import { useLocation } from "react-router-dom";
+import AvatarImg from "../assets/img/avatar.png";
 
 const Profile = () => {
   const [{ user }] = useStateValue();
@@ -13,23 +14,12 @@ const Profile = () => {
   const location = useLocation();
   const pathname = location.pathname.substring(1);
 
-  const data = {
-    name: "Vivek Sahu",
-    avatar: "https://picsum.photos/200",
-    description:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi, dolor tempora. Molestiae quibusdam, debitis nam eveniet velit mollitia enim labore quasi voluptatum? Suscipit fugiat magni modi dolor temporibus! Cumque, aliquid! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam sint optio hic labore officia eius? Iste, veritatis. Placeat quisquam dolores veniam sed eum minima, omnis veritatis, eius, ipsa totam ad. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab inventore beatae optio voluptate fuga, ea minima, rem sapiente harum nesciunt facilis quaerat amet, veniam voluptatem pariatur quibusdam blanditiis officia nostrum!",
-    username: "viveksahu",
-    thumbnail: Thumnail,
-  };
-
   const [profileData, setProfileData] = useState({});
   const [fetched, setFetched] = useState(false);
   // console.log(profileData);
   const getData = async () => {
     try {
-      const { data } = await axios.get(
-        `/user/channel?username=${pathname}`
-      );
+      const { data } = await axios.get(`/user/channel?username=${pathname}`);
       console.log(data);
       if (data.status === 200) {
         setProfileData(data.payload);
@@ -54,17 +44,24 @@ const Profile = () => {
       {profileData && fetched && (
         <>
           <div className="relative">
-            <img
-              src={profileData.coverimage}
-              className="w-full h-[300px] object-fill"
-              alt=""
-            />
+            {profileData.coverimage ? (
+              <img
+                src={profileData.coverimage}
+                className="w-full md:h-[300px] h-[100px] object-fill"
+                alt="cover"
+              />
+            ) : (
+              <div
+                className="w-full bg-gray-100 h-[100px] shadow-sm md:h-[300px] object-fill"
+                alt="cover"
+              />
+            )}
 
             <div className="absolute -bottom-10 ">
               <img
                 alt="profilephoto"
-                src={profileData.avatar}
-                className="rounded-full aspect-square w-20 h-20"
+                src={profileData.avatar ? profileData.avatar : AvatarImg}
+                className="rounded-full ml-4 aspect-square w-20 h-20"
               />
             </div>
           </div>
@@ -84,6 +81,7 @@ const Profile = () => {
             </div>
 
             <div className="pb-32">
+              <p className="text-2xl font-semibold">Videos</p>
               <ProfileCards profilePageData={profileData.videos} />
             </div>
           </div>

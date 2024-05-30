@@ -9,14 +9,14 @@ const Login = () => {
   const [isSignupClicked, setIsSignupClicked] = useState(false);
   const [{ user }] = useStateValue();
   const navigate = useNavigate();
-  console.log(user?.authenticated)
+  console.log(user?.authenticated);
 
   useEffect(() => {
     if (user?.authenticated) navigate("/");
   }, [user]);
 
   return (
-    <div>
+    <div className="mt-20 md:mt-0">
       {/* <Navbar /> */}
       {isSignupClicked ? (
         <SignupForm

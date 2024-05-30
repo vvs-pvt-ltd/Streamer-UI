@@ -38,7 +38,7 @@ export function PopoverDemo() {
         <img src={AvatarImg} alt="avatar" className="w-11 h-11 rounded-full" />
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
-        {user.authenticated && (
+        {user.authenticated ? (
           <div className="grid gap-2">
             <Link to={`/${user.username}`}>
               <Button variant="outline" className="border-none outline-none">
@@ -48,6 +48,14 @@ export function PopoverDemo() {
             <Button variant="destructive" onClick={handleLogout}>
               Logout
             </Button>
+          </div>
+        ) : (
+          <div className="grid gap-2">
+            <Link to={`/login`}>
+              <Button variant="outline" className="border-none outline-none">
+                Login
+              </Button>
+            </Link>
           </div>
         )}
 

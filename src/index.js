@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Login } from "./pages";
 import { StateProvider } from "./context/StateProvider";
 import { initialState } from "./context/intialState";
 import reducer from "./context/reducer";

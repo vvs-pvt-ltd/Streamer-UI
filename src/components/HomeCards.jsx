@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Cards from "./homeCards/Cards";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import Loader from "./loader";
 
 const HomeCards = () => {
   const [homePageData, setHomePageData] = useState([]);
@@ -34,7 +35,7 @@ const HomeCards = () => {
     <div className="mt-8">
       {/* <p>Other Streams</p> */}
       {homePageData.length > 0 && isFetched ? (
-        <div className="grid grid-cols-3 gap-8 pb-10">
+        <div className="grid md:grid-cols-3 gap-8 pb-10">
           {homePageData.map((item, index) => (
             <Link to={`/video/${item._id}`}>
               {console.log(item)}
@@ -43,7 +44,9 @@ const HomeCards = () => {
           ))}
         </div>
       ) : (
-        <p className="w-full text-center pb-36">Loading...</p>
+        <div className="w-full text-center pb-36 mt-24">
+          <Loader />
+        </div>
       )}
     </div>
   );

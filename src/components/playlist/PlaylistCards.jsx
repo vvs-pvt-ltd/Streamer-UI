@@ -4,6 +4,7 @@ import Cards from "../homeCards/Cards";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useStateValue } from "../../context/StateProvider";
+import Loader from "../loader";
 
 const PlaylistCards = () => {
   const [homePageData, setHomePageData] = useState([]);
@@ -45,7 +46,9 @@ const PlaylistCards = () => {
           ))}
         </div>
       ) : (
-        <p className="w-full text-center pb-36">Loading...</p>
+        <div className="w-full text-center pb-36 mt-24">
+          <Loader />
+        </div>
       )}
     </div>
   );
