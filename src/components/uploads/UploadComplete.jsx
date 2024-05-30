@@ -4,7 +4,6 @@ import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import Switch from "./Switch";
 import { Button } from "../ui/button";
-import videoFile from "../../assets/ss.mp4";
 
 const UploadComplete = ({
   videoId,
