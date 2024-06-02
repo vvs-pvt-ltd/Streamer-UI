@@ -20,9 +20,9 @@ const ProfileCards = ({ profilePageData }) => {
     <div className="mt-8">
       {/* <p>Other Streams</p> */}
       {profilePageData.length > 0 ? (
-        <div className="grid grid-cols-3 gap-8 pb-10">
+        <div className="grid md:grid-cols-3 gap-8 pb-10">
           {profilePageData.map((item, index) => (
-            <Link to={`/video/${item._id}`}>
+            <Link to={`/video/${item._id}`} key={index}>
               <Cards index={index} item={item} key={item.id} />
             </Link>
           ))}

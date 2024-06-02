@@ -17,6 +17,7 @@ import { useStateValue } from "./context/StateProvider";
 import ProtectedRoute from "./auth/UserProtectedRoutes";
 import axios from "axios";
 import Profile from "./pages/Profile";
+import Explore from "./pages/Explore";
 
 const App = () => {
   const [{ user }] = useStateValue();
@@ -61,6 +62,7 @@ const App = () => {
             <Route path="/demo" element={<Demo />} />
             <Route path="/dummy" element={<Dummy />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/explore" element={<Explore />} />
 
             {/* <Route path="/app" ></Route> */}
           </Routes>

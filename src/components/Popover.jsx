@@ -21,13 +21,11 @@ export function PopoverDemo() {
     _id: null,
     authenticated: false,
   };
-
   const handleLogout = () => {
     dispatch({
       type: actionType.SET_USER,
       user: logoutObj,
     });
-
     localStorage.setItem("user", JSON.stringify(logoutObj));
     navigate("/login");
   };
@@ -40,11 +38,11 @@ export function PopoverDemo() {
       <PopoverContent className="w-full p-0">
         {user.authenticated ? (
           <div className="grid gap-2">
-            <Link to={`/${user.username}`}>
+            <a href={`/${user.username}`}>
               <Button variant="outline" className="border-none outline-none">
                 Profile
               </Button>
-            </Link>
+            </a>
             <Button variant="destructive" onClick={handleLogout}>
               Logout
             </Button>
@@ -58,49 +56,6 @@ export function PopoverDemo() {
             </Link>
           </div>
         )}
-
-        {/* <div className="grid gap-4">
-          <div className="space-y-2">
-            <h4 className="font-medium leading-none">Dimensions</h4>
-            <p className="text-sm text-muted-foreground">
-              Set the dimensions for the layer.
-            </p>
-          </div>
-          <div className="grid gap-2">
-            <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="width">Width</Label>
-              <Input
-                id="width"
-                defaultValue="100%"
-                className="col-span-2 h-8"
-              />
-            </div>
-            <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="maxWidth">Max. width</Label>
-              <Input
-                id="maxWidth"
-                defaultValue="300px"
-                className="col-span-2 h-8"
-              />
-            </div>
-            <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="height">Height</Label>
-              <Input
-                id="height"
-                defaultValue="25px"
-                className="col-span-2 h-8"
-              />
-            </div>
-            <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="maxHeight">Max. height</Label>
-              <Input
-                id="maxHeight"
-                defaultValue="none"
-                className="col-span-2 h-8"
-              />
-            </div>
-          </div>
-        </div> */}
       </PopoverContent>
     </Popover>
   );

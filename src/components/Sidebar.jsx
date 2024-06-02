@@ -29,11 +29,26 @@ const Sidebar = () => {
         <div
           className={`w-full flex items-center justify-start gap-3 py-3 px-5 rounded-xl ${
             activeButton === "/" ? "bg-primary text-white" : "text-textColor"
-          }`}
-        >
+          }`}>
           {/* <img src={TrendingIcon} /> */}
           <GoHome className="text-xl" />
           <button>Home</button>
+        </div>
+      </Link>
+
+      <Link to="/explore">
+        <div
+          className={`w-full flex gap-3 py-3 px-5 rounded-xl ${
+            activeButton === "/explore"
+              ? "bg-primary text-white"
+              : "text-textColor"
+          }`}>
+          {activeButton === "/explore" ? (
+            <img src={trendingIconSelected} alt="trending-icon" />
+          ) : (
+            <img src={trendingIcon} alt="trending-icon" />
+          )}
+          <button>Explore</button>
         </div>
       </Link>
       <Link to="/trending">
@@ -42,8 +57,7 @@ const Sidebar = () => {
             activeButton === "/trending"
               ? "bg-primary text-white"
               : "text-textColor"
-          }`}
-        >
+          }`}>
           {activeButton === "/trending" ? (
             <img src={trendingIconSelected} alt="trending-icon" />
           ) : (
@@ -59,8 +73,7 @@ const Sidebar = () => {
               activeButton === `/${user.username}/following`
                 ? "bg-primary text-white"
                 : "text-textColor"
-            }`}
-          >
+            }`}>
             {activeButton === `/${user.username}/following` ? (
               <img src={followingIconSelected} alt="following-icon" />
             ) : (
@@ -78,8 +91,7 @@ const Sidebar = () => {
               activeButton === `/${user.username}/playlist`
                 ? "bg-primary text-white"
                 : "text-textColor"
-            }`}
-          >
+            }`}>
             {activeButton === `/${user.username}/playlist` ? (
               <img src={playlistIconSelected} alt="playlist-icon" />
             ) : (
@@ -97,8 +109,7 @@ const Sidebar = () => {
               activeButton === "/upload"
                 ? "bg-primary text-white"
                 : "text-textColor"
-            }`}
-          >
+            }`}>
             {activeButton === "/upload" ? (
               <img src={yourVideoIconSelected} alt="your-video" />
             ) : (
@@ -116,8 +127,7 @@ const Sidebar = () => {
               activeButton === "/login"
                 ? "bg-primary text-white"
                 : "text-textColor"
-            }`}
-          >
+            }`}>
             {activeButton === "/login" ? (
               <img src={yourVideoIconSelected} alt="login" />
             ) : (
